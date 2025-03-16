@@ -85,20 +85,6 @@ log['datetime_kst'] = pd.to_datetime(log['datetime_kst']) + timedelta(hours=9)
   - GA(Google Analytics)와 같은 웹 분석 도구에서는 30분으로 선정하기 때문에 이에 맞춰 유저별 세션은 30분으로 부여
 
 ```
-# 사용자별 상위 20개 전환 경로 분석 
-companies/company_id/jobs -> jobs/id/apply: 179824회
-companies/company_id -> companies/company_id/jobs: 123740회
-jobs/id/apply/step1 -> jobs/id/apply/step2: 120587회
-jobs/id/apply -> @user_id: 115988회
-@user_id -> companies/company_id: 108536회
-jobs/id/apply -> jobs/id/apply/step1: 93972회
-companies/company_id -> @user_id: 91344회
-jobs -> jobs/id/apply: 91148회
-jobs/id/apply -> companies/company_id/jobs: 90709회
-jobs/id/apply/step2 -> jobs/id/apply/step3: 86667회
-... 생략
-```
-- 가장 먼저 눈에 들어오는 경로는 apply와 하위 경로 step 
 
 #### 결측치 확인
 ![image](https://github.com/user-attachments/assets/f50d40c8-8d2e-48fe-b147-a67ea70f5b13)
@@ -189,7 +175,28 @@ main_page → @user_id → @user_id/job_offer/received
 - 데이터를 제공해준 채용플랫폼에서 URL에 대한 메타데이터를 제공받지 못해 추측으로 경로 분석을 진행하였지만 해당 경로들로 보았을 때 메인페이지로 보는 것이 합당하다고 판단됨
 - 이를 통해 인사이트 및 가설을 만들어낼 수는 없었지만 결측치를 제거, 데이터 대체(중앙값, 평균값) 등으로 처리하는 것만 아니라 직접 데이터를 추적하여 결측치를 보존할 수 있는 방법이 있다는 것을 배울 수 있었음.
 
-### 퍼널 분석
+## Step 3. 퍼널 분석
+# 사용자별 상위 20개 전환 경로 분석 
+
+```
+companies/company_id/jobs -> jobs/id/apply: 179824회
+companies/company_id -> companies/company_id/jobs: 123740회
+jobs/id/apply/step1 -> jobs/id/apply/step2: 120587회
+jobs/id/apply -> @user_id: 115988회
+@user_id -> companies/company_id: 108536회
+jobs/id/apply -> jobs/id/apply/step1: 93972회
+companies/company_id -> @user_id: 91344회
+jobs -> jobs/id/apply: 91148회
+jobs/id/apply -> companies/company_id/jobs: 90709회
+jobs/id/apply/step2 -> jobs/id/apply/step3: 86667회
+... 생략
+```
+
+- 가장 먼저 눈에 들어오는 경로는 apply와 하위 경로 step1 ~ 4
+- 채용 플랫폼 답게 지원서 작성 페이지가 많이 호출되고 있음을 확인.
+- 단계별로 이루어진 페이지이기에 퍼널 분석이 적합하다고 판단됨.
+
+![newplot (5)](https://github.com/user-attachments/assets/b4ba466e-e66b-4f67-a4fd-68d210c2e4ab)
 
 
   
